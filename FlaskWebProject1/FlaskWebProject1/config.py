@@ -1,1 +1,4 @@
-SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/test.db'
+import os
+basedir = os.path.abspath(os.path.dirname(__file__))
+SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(os.path.join(basedir,'tmp'), 'app.db')
+SQLALCHEMY_TRACK_MODIFICATIONS = False
