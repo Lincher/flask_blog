@@ -6,9 +6,9 @@ class User(db.Model):
     username = db.Column(db.String(80), unique=True)
     email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(12))
-    permission = db.Column(db.Integer)
+    permission = db.Column(db.String(12))
 
-    def __init__(self, username, email, password, permission=0):
+    def __init__(self, username, email, password, permission='guest'):
         self.username = username
         self.email = email
         self.password = password
