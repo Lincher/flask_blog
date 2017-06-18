@@ -44,13 +44,14 @@ def about():
 def login():
     user = models.User.query.filter_by(
         email=request.form.get('email')).first()
-        #  不加first()或者all()只是一个查询对象，并没有执行
-    
+    #  不加first()或者all()只是一个查询对象，并没有执行
+
     if user is None:
-        return False
+        return {"loginSuccess": False,
+               'loginFailedReason':'该邮箱不存在' }
     else:
         if user.password == request.form.get('password'):
-            return True
-
-    
-    
+            return {'loginSuccess':True}
+        else:
+            return {'loginSuccess':False,
+            'loginFailedReason':'密码错误'}
