@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
+    <script src="/static/scripts/jquery-1.10.2.min.js"></script>
+    <title>Document</title>
+    <script>
+        function login(){
+            var email =$.trim($('#Email').val());
+            var password =$.trim($('#Password').val());
+            var url = "/login";
+            var param = {'email':email,'password':password};
+            // 数据验证
+            $.post(url,param,function(data){
+                alert(data)
+            })           
+        }
+    </script>
+</head>
+
+<body>
+    <form>
+        <div class="form-group">
+            <label for="Email">Email address</label>
+            <input type="email" class="form-control" id="Email" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="Password">Password</label>
+            <input type="password" class="form-control" id="Password" placeholder="Password">
+        </div>
+    </label>
+        </div>
+        <button type="button" class="btn btn-default" onclick="login()">Submit</button>
+    </form>
+</body>
+
+</html>

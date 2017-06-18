@@ -3,8 +3,8 @@ Routes and views for the flask application.
 """
 
 from datetime import datetime
-from flask import render_template
-from FlaskWebProject1 import app
+from flask import render_template, request, redirect, url_for, session, flash
+from FlaskWebProject1 import app, models
 
 
 @app.route('/')
@@ -38,3 +38,19 @@ def about():
         year=datetime.now().year,
         message='Your application description page.'
     )
+
+
+@app.route('/login', methods=['POST'])
+def login():
+    user = models.User.query.filter_by(
+        email=request.form.get('email')).first()
+        #  不加first()或者all()只是一个查询对象，并没有执行
+    
+    if user is None:
+        return False
+    else:
+        if user.password == request.form.get('password'):
+            return True
+
+    
+    
