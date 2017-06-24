@@ -26,9 +26,12 @@
             // 数据验证
             $.post(url, param, function (data) {
                 var json = JSON.parse(data)
-                alert(json.loginFailedReason)
                 if(!json.loginSuccess){
                     $('#warn').text(json.loginFailedReason)
+                }else{
+                    var index = parent.layer.getFrameIndex(
+                        window.name)
+                    parent.layer.close(index)
                 }
             })
         }
