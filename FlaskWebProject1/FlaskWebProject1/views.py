@@ -1,7 +1,7 @@
 """
 Routes and views for the flask application.
 """
-
+import json
 from datetime import datetime
 from flask import render_template, request, redirect, url_for, session, flash
 from FlaskWebProject1 import app, models
@@ -45,13 +45,14 @@ def login():
     user = models.User.query.filter_by(
         email=request.form.get('email')).first()
     #  不加first()或者all()只是一个查询对象，并没有执行
-
+    #  JSON 只能用双引号
     if user is None:
-        return {"loginSuccess": False,
-               'loginFailedReason':'该邮箱不存在' }
+        data = {"loginSuccess": False,
+               "loginFailedReason":"该邮箱不存在" }
+        return json.dumps(data,ensure_ascii=False)
     else:
-        if user.password == request.form.get('password'):
-            return {'loginSuccess':True}
+        if user.password == request.form.get("password"):
+            return json.dumps({"loginSuccess":True},ensure_ascii=False)
         else:
-            return {'loginSuccess':False,
-            'loginFailedReason':'密码错误'}
+            return json.dumps({"loginSuccess":False,
+            "loginFailedReason":"密码错误"},ensure_ascii=False)
