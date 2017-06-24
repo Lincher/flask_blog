@@ -12,12 +12,12 @@
             "host": "localhost"
         },
         {
-            "name": "Python",
+            "name": "Python_file",
             "type": "python",
             "request": "launch",
             "stopOnEntry": true,
             "pythonPath": "${config:python.pythonPath}",
-            "program": "${workspaceRoot}/runserver.py",
+            "program": "${file}",
             "cwd": "${workspaceRoot}",
             "env": {},
             "envFile": "${workspaceRoot}/env",

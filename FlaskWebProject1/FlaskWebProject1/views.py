@@ -48,11 +48,12 @@ def login():
     #  JSON 只能用双引号
     if user is None:
         data = {"loginSuccess": False,
-               "loginFailedReason":"该邮箱不存在" }
-        return json.dumps(data,ensure_ascii=False)
+                "loginFailedReason": "该邮箱不存在"}
+        return json.dumps(data, ensure_ascii=False)
     else:
         if user.password == request.form.get("password"):
-            return json.dumps({"loginSuccess":True},ensure_ascii=False)
+            return json.dumps({"loginSuccess":True},
+            ensure_ascii=False)
         else:
-            return json.dumps({"loginSuccess":False,
-            "loginFailedReason":"密码错误"},ensure_ascii=False)
+            return json.dumps({"loginSuccess": False,
+                               "loginFailedReason": "密码错误"}, ensure_ascii=False)
