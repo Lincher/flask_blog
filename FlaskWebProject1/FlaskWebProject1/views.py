@@ -2,12 +2,11 @@
 Routes and views for the flask application.
 """
 import json
-from datetime import datetime
+import datetime
 from flask import (render_template, request, redirect, url_for, session, flash,
-g, blueprints)
-from FlaskWebProject1 import (app, models, login_manager)
+g, Blueprint)
+from FlaskWebProject1 import (app, models, login_manager,login_required)
 from .models import *
-from views_auth import *
 
 
 
@@ -18,7 +17,7 @@ def home():
     return render_template(
         'index.html',
         title='Home Page',
-        year=datetime.now().year,
+        year=datetime.datetime.now().year,
     )
 
 
@@ -28,7 +27,7 @@ def contact():
     return render_template(
         'contact.html',
         title='Contact',
-        year=datetime.now().year,
+        year=datetime.datetime.now().year,
         message='Your contact page.'
     )
 
@@ -39,7 +38,7 @@ def about():
     return render_template(
         'about.html',
         title='About',
-        year=datetime.now().year,
+        year=datetime.datetime.now().year,
         message='Your application description page.'
     )
 

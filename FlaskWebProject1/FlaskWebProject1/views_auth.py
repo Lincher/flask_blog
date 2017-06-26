@@ -1,14 +1,14 @@
 import json
 from datetime import datetime
 from flask import (render_template, request, redirect, url_for, session, flash,
-g, blueprints)
-from FlaskWebProject1 import (app, models, login_manager)
+g, Blueprint)
+from FlaskWebProject1 import (app, models, login_manager, login_required)
 from .models import *
 
 # url redirect
 # 蓝图，路由模块化
-auth = blueprints('auth',__name__)
-app.register_blueprint(auth, url_prefix='/auth')
+auth = Blueprint('auth',__name__)
+
 
 # 手工版login
 # @app.route('/login', methods=['POST'])
@@ -34,9 +34,19 @@ app.register_blueprint(auth, url_prefix='/auth')
 # flask-login版login
 @auth.route('/login', methods=['GET','POST'])
 def login():
-    form = 
-                            
-                        
+    return 'Login page' 
+
+
+@auth.route('/logout', methods=['GET','POST'])
+@login_required
+def logout():
+    return 'LogOut Page'
+
+
+
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
+# 一定要在写完所有路由函数后 加这句话，否则会丢失路由
+app.register_blueprint(auth, url_prefix='/auth')
