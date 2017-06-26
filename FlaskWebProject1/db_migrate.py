@@ -25,6 +25,7 @@ tmp_module = imp.new_module('old_model')
 old_model = api.create_model(SQLALCHEMY_DATABASE_URI,
                              SQLALCHEMY_MIGRATE_REPO)
 # 执行old_model中的语句在 tmp_module的作用域中，这样就不会污染全局环境
+#  __dict__ 类的属性
 exec(old_model, tmp_module.__dict__)
 script = api.make_update_script_for_model(
     SQLALCHEMY_DATABASE_URI,
@@ -32,8 +33,6 @@ script = api.make_update_script_for_model(
     tmp_module.meta,  # 旧数据库的元数据
     db.metadata   # 新数据库的元数据
 )
-
-
 
 # 为了保证迁移成功，一定不要重命名字段
 
