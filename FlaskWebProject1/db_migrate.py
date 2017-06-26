@@ -38,6 +38,7 @@ script = api.make_update_script_for_model(
 # 为了保证迁移成功，一定不要重命名字段
 
 open(migration, 'w').write(script)
+# 迁移的时候已经升级了
 api.upgrade(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO)
 print("New migration saved as %s" % migration)
 print('Current database version: %s' % str(api.db_version(
