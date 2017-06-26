@@ -33,6 +33,8 @@ script = api.make_update_script_for_model(
     db.metadata   # 新数据库的元数据
 )
 
+
+
 # 为了保证迁移成功，一定不要重命名字段
 
 open(migration, 'w').write(script)
