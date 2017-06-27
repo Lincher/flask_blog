@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 from flask import (render_template, request, redirect, url_for, session, flash,
 g, Blueprint)
-from FlaskWebProject1 import (app, models, login_manager, login_required)
+from FlaskWebProject1 import *
 from .models import *
 
 # url redirect
@@ -32,14 +32,30 @@ auth = Blueprint('auth',__name__)
 
 
 # flask-login版login
-@auth.route('/login', methods=['GET','POST'])
+@auth.route('/login', methods=['POST'])
 def login():
-    return 'Login page' 
+    user = models.User.query.filter_by(
+    email=request.form.get('email')).first()
+    #  不加first()或者all()只是一个查询对象，并没有执行
+    #  JSON 只能用双引号
+    if user is None:
+        data = {"loginSuccess": False,
+                "loginFailedReason": "该邮箱不存在"}
+        return json.dumps(data, ensure_ascii=False)
+    else:
+        if user.password == request.form.get("password"):
+            login_user(user)
+            return json.dumps({"loginSuccess":True},
+            ensure_ascii=False)
+        else:
+            return json.dumps({"loginSuccess": False,
+                               "loginFailedReason": "密码错误"}, ensure_ascii=False)
 
 
 @auth.route('/logout', methods=['GET','POST'])
 @login_required
 def logout():
+    logout_user()
     return 'LogOut Page'
 
 
