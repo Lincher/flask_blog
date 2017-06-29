@@ -24,13 +24,25 @@ def home():
 @app.route('/linchuanjie/about')
 def about():
     """Renders the about page."""
+    # if request.method == 'get':
     return render_template(
         'about.html',
         title='About',
         year=datetime.datetime.now().year,
         message='Your application description page.',
         user = User.query.first()
-    )
+    )   
+    
+
+@app.route('/linchuanjie/about/change',methods=['POST'])
+@login_required
+def about_change():
+    current_user.introduction = request.form.get(
+        "introduction")
+    db.session.add(current_user)
+    db.session.commit()
+    return redirect(url_for('about'))
+
 
 
 @app.route('/linchuanjie/post/<int:post_id>')
@@ -44,7 +56,8 @@ def show_post(post_id):
         post=post
         )
 
-# @app.route('/test')
-# def test():
-    # return redirect(url_for("show_post",post_id=1))
+
+# @app.route('/linchuanjie/auth/login',methods=['GET','POST'])
+# def login_redirect():
+#     return redirect(url_for("auth.login"))
 

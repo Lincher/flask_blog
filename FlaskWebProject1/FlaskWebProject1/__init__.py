@@ -6,7 +6,7 @@ g, Blueprint)
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import (LoginManager, login_fresh,
 login_required, login_url, login_user, logout_user, 
-UserMixin)
+UserMixin,current_user)
 
 app = Flask(__name__)
 

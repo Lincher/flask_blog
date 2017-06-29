@@ -25,7 +25,7 @@ def login():
     else:
         if user.password == request.form.get("password"):
             # import ipdb;ipdb.set_trace()
-            g.user = user
+            # g.user = user
             login_user(user,
                        remember=request.form.get("remember_me")
                        )
