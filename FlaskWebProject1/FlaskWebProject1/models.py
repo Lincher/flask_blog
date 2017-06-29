@@ -7,16 +7,15 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(80), unique=True)
     email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(12))
-    permission = db.Column(db.String(12))
+    permission = db.Column(db.String(12),default="guest")
     gander = db.Column(db.Boolean)
     birthdate = db.Column(db.DateTime)
+    introduction = db.Column(types.Text,default="这个人很懒，没有任何说明")
     post = db.relationship('Post',backref='author',lazy='dynamic')
 
-    def __init__(self, username, email, password,permission='guest'):
-        self.username = username
-        self.email = email
-        self.password = password
-        self.permission = permission
+    def __init__(self,**kw):
+        super() .__init__(**kw)
+        
 
     def __repr__(self):
         return '<User %r>,email:%r,password:%r,permission:%r,\
