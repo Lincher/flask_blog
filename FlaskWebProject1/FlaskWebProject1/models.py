@@ -1,6 +1,6 @@
 import datetime
 from FlaskWebProject1 import db, UserMixin
-
+from sqlalchemy import types
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -8,16 +8,21 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(12))
     permission = db.Column(db.String(12))
+    gander = db.Column(db.Boolean)
+    birthdate = db.Column(db.DateTime)
+    test = db.Column(types.BOOLEAN,nullable=True,default=True)
     post = db.relationship('Post',backref='author',lazy='dynamic')
 
-    def __init__(self, username, email, password, permission='guest'):
+    def __init__(self, username, email, password,permission='guest'):
         self.username = username
         self.email = email
         self.password = password
         self.permission = permission
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '<User %r>,email:%r,password:%r,permission:%r,\
+        gander:%r,birthdata:%r' % (self.username,self.email,
+        self.password,self.permission,self.gander,self.birthdate)
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
