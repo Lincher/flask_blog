@@ -1,7 +1,6 @@
 import json
 from datetime import datetime
-from flask import (render_template, request, redirect, url_for, session, flash,
-                   g, Blueprint)
+from flask import (render_template, request, redirect, url_for, session, flash,g, Blueprint)
 from FlaskWebProject1 import *
 from .models import *
 
@@ -25,8 +24,8 @@ def login():
         return json.dumps(data, ensure_ascii=False)
     else:
         if user.password == request.form.get("password"):
-            import ipdb
-            ipdb.set_trace()
+            # import ipdb;ipdb.set_trace()
+            g.user = user
             login_user(user,
                        remember=request.form.get("remember_me")
                        )

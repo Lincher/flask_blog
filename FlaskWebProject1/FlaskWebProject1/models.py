@@ -10,7 +10,6 @@ class User(db.Model, UserMixin):
     permission = db.Column(db.String(12))
     gander = db.Column(db.Boolean)
     birthdate = db.Column(db.DateTime)
-    test = db.Column(types.BOOLEAN,nullable=True,default=True)
     post = db.relationship('Post',backref='author',lazy='dynamic')
 
     def __init__(self, username, email, password,permission='guest'):

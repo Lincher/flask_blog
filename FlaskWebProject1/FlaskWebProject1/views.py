@@ -7,9 +7,8 @@ from FlaskWebProject1 import *
 from .models import *
 
 
-
 @app.route('/')
-@app.route("/LinChuanJie")
+@app.route("/linchuanjie")
 def home():
     """Renders the home page."""
     # import ipdb;ipdb.set_trace()
@@ -22,18 +21,19 @@ def home():
     )
 
 
-@app.route('/about')
+@app.route('/linchuanjie/about')
 def about():
     """Renders the about page."""
     return render_template(
         'about.html',
         title='About',
         year=datetime.datetime.now().year,
-        message='Your application description page.'
+        message='Your application description page.',
+        user = User.query.first()
     )
 
 
-@app.route('/Linchuanjie/<int:post_id>')
+@app.route('/linchuanjie/post/<int:post_id>')
 def show_post(post_id):
     # import ipdb;ipdb.set_trace()
     post = Post.query.filter_by(id=post_id).first()
