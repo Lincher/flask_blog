@@ -11,4 +11,10 @@
     <a href="{{url_for('show_post',post_id=post.id)}}">{{post.title}}
       </a>
 </div>
-{% endfor %} {% endblock %}
+{% endfor %} 
+{% if current_user.is_authenticated %}
+<div class="row">
+    <a href="">写一篇日志</a>
+</div>
+{% endif %}
+{% endblock %}

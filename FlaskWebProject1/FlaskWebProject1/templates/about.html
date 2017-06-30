@@ -1,6 +1,6 @@
 {% extends "layout.html" %} {% block content %}
-<img src="{{url_for('about_download',filename=user.avatar)}}" alt="">
 
+<img src="{{url_for('about_download',filename=user.avatar)}}" alt="">
 <h1>User:{{user.username}}</h1>
 {% if user.gander %}
 <h3>性别: 男</h3>
