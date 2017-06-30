@@ -12,6 +12,7 @@ class User(db.Model, UserMixin):
     birthdate = db.Column(db.DateTime)
     introduction = db.Column(types.Text,default="这个人很懒，没有任何说明")
     avatar = db.Column(types.String(),default="user.png")
+    domain_name = db.Column(types.String(20),nullable=False)
     post = db.relationship('Post',backref='author',lazy='dynamic')
 
     def __init__(self,**kw):
@@ -20,9 +21,10 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return '<User %r>,email:%r,password:%r,permission:%r,\
-        gander:%r,birthdata:%r,avatar:%r' % (self.username,self.email,
-        self.password,self.permission,self.gander,self.birthdate,
-        self.avatar    )
+        gander:%r,birthdata:%r,avatar:%r,domain_name:%r'%(
+        self.username,self.email, self.password,
+         self.permission,self.gander,self.birthdate,
+        self.avatar,self.domain_name    )
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
