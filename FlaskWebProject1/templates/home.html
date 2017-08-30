@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>丑萌的主页君</title>
+    <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/content/site.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/package/layer/skin/default/layer.css"/>
+    <!--后端渲染资源路径以后端为准？-->
+    <script src="/static/scripts/modernizr-2.6.2.js"></script>
+    <script src="/static/scripts/jquery-1.10.2.min.js"></script>
+    <script src="/static/package/layer/layer.js"></script>
+    <script src="/static/scripts/main.js"></script>
+    <!--<script src="/static/scripts/jquery-1.10.2.js"></script>-->
+    <script src="/static/scripts/bootstrap.js"></script>
+    <script src="/static/scripts/respond.js"></script>
+    <script>
+
+    </script>
+</head>
+
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">丑萌的主页君</a>
+        </div>
+        <div class="navbar-collapse collapse">
+
+            <ul class="nav navbar-nav navbar-right">
+                {% if current_user.is_authenticated %}
+                <li><a>Hi {{ user.username }}!</a></li>
+                <li><a href="{{ url_for('auth.logout')}}">Logout</a></li>
+                {% else %}
+                <li><a href="javascript:regist()">Regist</a></li>
+                <li><a href="javascript:login()">Login</a></li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container body-content">
+    <table class="table">
+        <thead>
+        <tr>
+            <td>博主列表</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+        <tr>
+            <td>
+                <a href="{{url_for('index',domain=user.domain_name)}}">{{user.username}}</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <ul>
+
+    </ul>
+    <hr/>
+    <footer>
+        <p>&copy; {{ year }} - My First Flask Application</p>
+    </footer>
+</div>
+
+{% block scripts %}{% endblock %}
+
+</body>
+
+
+</html>

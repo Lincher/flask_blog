@@ -1,0 +1,33 @@
+{% extends "layout.html" %} {% block content %}
+
+<!--<div class="jumbotron">
+    <h1>Flask</h1>
+    <p class="lead">Flask is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="http://flask.pocoo.org/" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+</div>-->
+
+<table class="table">
+    <thead>
+    <tr>
+        <td>#</td>
+        <td>文章列表</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% set count=[0] %}
+    {% for post in posts %}
+    <tr>
+        <td>{{count|counting}}</td>
+        <td>
+            <div class="row" id="posts">
+            <a href="{{url_for('show_post',domain=user.domain_name,post_id=post.id)}}">{{post.title}}
+            </a>
+        </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}
