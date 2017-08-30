@@ -1,79 +1,3 @@
-<<<<<<< HEAD:FlaskWebProject1/FlaskWebProject1/templates/layout.html
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} - 林川杰的个人小站</title>
-    <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
-    <link rel="stylesheet" type="text/css" href="/static/package/layer/skin/default/layer.css" />
-    <!--后端渲染资源路径以后端为准？-->
-    <script src="/static/scripts/modernizr-2.6.2.js"></script>
-    <script src="/static/scripts/jquery-1.10.2.min.js"></script>
-    <script src="/static/package/layer/layer.js"></script>
-    <script src="/static/scripts/main.js"></script>
-    <!--<script src="/static/scripts/jquery-1.10.2.js"></script>-->
-    <script src="/static/scripts/bootstrap.js"></script>
-    <script src="/static/scripts/respond.js"></script>
-    <script>
-
-    </script>
-</head>
-
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="/" class="navbar-brand">林川杰的个人小站</a>
-            </div>
-            <div class="navbar-collapse collapse">
-
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('home') }}">Home</a></li>
-                    <li><a href="{{ url_for('about') }}">About</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    {% if current_user.is_authenticated %}
-                    <li>Hi {{ current_user.name }}!</li>
-                    <li><a href="{{ url_for('auth.logout')}}">Logout</a></li>
-                    {% else %}
-                    <li><a href="javascript:login()">Login</a></li>
-                    <!--<li><a href="{{ url_for('about')}}">Login</a></li>-->
-                    {% endif %}
-
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="container body-content">
-        {% with messages = get_flashed_messages() %} 
-        {% if messages %}
-        <ul class=flashes>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %} 
-        {% endwith %} {% block content %}{% endblock %}
-        <hr />
-        <footer>
-            <p>&copy; {{ year }} - My First Flask Application</p>
-        </footer>
-    </div>
-
-    {% block scripts %}{% endblock %}
-
-</body>
-
-=======
 <!DOCTYPE html>
 <html>
 
@@ -146,5 +70,4 @@
 
 </body>
 
->>>>>>> backup:FlaskWebProject1/templates/layout.html
 </html>
