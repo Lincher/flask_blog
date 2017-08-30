@@ -12,3 +12,4 @@ flask-script
 guess_language
 flipflop
 coverage
+PIL
