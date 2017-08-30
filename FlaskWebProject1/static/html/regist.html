@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
+    <script src="/static/scripts/jquery-1.10.2.min.js"></script>
+    <title>Document</title>
+    <script>
+        function login() {
+            var email = $.trim($('#Email').val());
+            var password = $.trim($('#Password').val());
+            var password2 =$.trim($('#Password2').val())
+            var englishname =$.trim($('#Englishname').val())
+            var username =$.trim($('#username').val())
+            var gander =$.trim($('[name="gander"]:checked').val())
+            var birthdate =$.trim($('#birthdate').val())
+            
+            function warn(str){
+                $("#warn").text(str)
+            }
+
+            if (email == '') {
+               return warn('请输入账号(邮箱)')
+            } else if (password == '') {
+               return warn('请输入密码')
+            } else if(password2==''){
+               return warn('请确认密码')
+            } else if(password2!=password){
+                return warn('前后密码不一致')
+            } else if(englishname==''){
+                return warn('英文名不能为空')
+            } else{
+
+            }
+
+            url='/auth/regist'
+            var param = {
+                "email": email, 
+                "password": password,
+                "englishname":englishname,
+                "username":username,
+                "gander":gander,
+                "birthdate":birthdate
+            };
+            $.post(url, param, function (data) {
+                var json = JSON.parse(data)
+                if (!json.registSuccess) {
+                    $('#warn').text(json.registFailedReason)
+                } else {
+                    parent.window.location.reload()
+                    var index = parent.layer.getFrameIndex(
+                        window.name)
+                    parent.layer.close(index)
+                }
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-offset-4">
+            <span id="warn" style="color:red">              </span>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="Email" class="col-sm-2 control-label col-sm-offset-2">Email address</label>
+            <div class="col-sm-6">
+                <input type="email" class="form-control " id="Email" placeholder="Email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Password" class="col-sm-2 control-label col-sm-offset-2">Password</label>
+            <div class="col-sm-6">
+                <input type="password" class="form-control" id="Password" placeholder="Password">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Password" class="col-sm-2 control-label col-sm-offset-2">
+                PwdConfirm</label>
+            <div class="col-sm-6">
+                <input type="password" class="form-control" id="Password2" placeholder="Password">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Englishname" class="col-sm-2 control-label col-sm-offset-2">English name</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control col-sm-10" id="Englishname" placeholder="English name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="username" class="col-sm-2 control-label col-sm-offset-2">nickname</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control col-sm-10" id="username" placeholder="nickname">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="col-sm-2 control-label col-sm-offset-2">gander</label>
+            <div class="col-sm-6">
+                <label><input type="radio" name="gander" id="optionsRadios1" value="male" checked>male</label>
+                <label><input type="radio" name="gander" id="optionsRadios2" value="female" checked>famale</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="birthdate" class="col-sm-2 control-label col-sm-offset-2">birthdate</label>
+            <div class="col-sm-6">
+                <input type="date" class="form-control col-sm-10" id="birthdate">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-6">
+                <button type="button" class="btn btn-default" onclick="login()">Submit</button>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

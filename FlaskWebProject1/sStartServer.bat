@@ -1,1 +1,0 @@
-Ipython runserver.py --pdb
